@@ -1,8 +1,8 @@
 import {useState, useMemo, useEffect} from "react";
-// eslint-disable-next-line no-unused-vars
 import {motion, AnimatePresence} from "framer-motion";
 import {products} from "./data/products";
 import ProductCard from "./components/ProductCard";
+import {LayoutGrid, List, Grid2X2, Sun, Moon} from "lucide-react";
 
 const phoneNumber = "5491162625807";
 
@@ -10,6 +10,7 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Todos");
   const [dark, setDark] = useState(false);
+  const [view, setView] = useState("cards"); // cards | list | compact
 
   // Persist dark mode
   useEffect(() => {
@@ -42,18 +43,17 @@ export default function App() {
 
   return (
     <div className={dark ? "dark" : ""}>
-      <div className="min-h-screen bg-neutral-50 dark:bg-neutral-900 transition-colors duration-300">
+      <div className="min-h-screen bg-white dark:bg-black transition-colors duration-300">
         <div className="max-w-md mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-6">
-            <h1 className="text-2xl font-semibold dark:text-white">
+            <h1 className="text-3xl font-semibold dark:text-white">
               Venta por mudanza
             </h1>
-
             <button
               onClick={() => setDark(!dark)}
-              className="px-3 py-1 rounded-full bg-neutral-200 dark:bg-neutral-700 dark:text-white"
+              className="p-2 rounded-full border border-black dark:border-white transition hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
             >
-              {dark ? "☀️" : "🌙"}
+              {dark ? <Sun size={18} /> : <Moon size={18} />}
             </button>
           </div>
 
@@ -64,10 +64,11 @@ export default function App() {
             placeholder="Buscar artículo..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full mb-4 px-4 py-3 rounded-2xl bg-white dark:bg-neutral-800 dark:text-white shadow-sm focus:outline-none"
+            className="w-full mb-4 px-4 py-3 rounded-2xl border border-black/20 dark:border-white/20 bg-white dark:bg-black dark:text-white focus:outline-none"
           />
 
-          <div className="flex gap-2 overflow-x-auto mb-6 pb-2">
+          {/* Categorías */}
+          <div className="flex gap-2 overflow-x-auto mb-4 pb-2">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -75,8 +76,8 @@ export default function App() {
                 className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition
                   ${
                     category === cat
-                      ? "bg-neutral-900 text-white dark:bg-white dark:text-black"
-                      : "bg-neutral-200 dark:bg-neutral-700 dark:text-white"
+                      ? "bg-black text-white dark:bg-white dark:text-black"
+                      : "border border-black/20 dark:border-white/20 dark:text-white"
                   }`}
               >
                 {cat}
@@ -84,10 +85,56 @@ export default function App() {
             ))}
           </div>
 
-          <div className="space-y-6">
+          <div className="md:hidden flex justify-end gap-6 mb-6">
+            <button
+              onClick={() => setView("cards")}
+              className={`p-2 rounded-full transition ${
+                view === "cards"
+                  ? "bg-black text-white dark:bg-white dark:text-black"
+                  : "text-black/40 dark:text-white/40"
+              }`}
+            >
+              <LayoutGrid size={20} />
+            </button>
+
+            <button
+              onClick={() => setView("list")}
+              className={`p-2 rounded-full transition ${
+                view === "list"
+                  ? "bg-black text-white dark:bg-white dark:text-black"
+                  : "text-black/40 dark:text-white/40"
+              }`}
+            >
+              <List size={20} />
+            </button>
+
+            <button
+              onClick={() => setView("compact")}
+              className={`p-2 rounded-full transition ${
+                view === "compact"
+                  ? "bg-black text-white dark:bg-white dark:text-black"
+                  : "text-black/40 dark:text-white/40"
+              }`}
+            >
+              <Grid2X2 size={20} />
+            </button>
+          </div>
+
+          {/* Productos */}
+          <div
+            className={`
+              ${
+                view === "compact"
+                  ? "grid grid-cols-2 gap-3"
+                  : view === "cards"
+                    ? "grid grid-cols-1 gap-6"
+                    : "flex flex-col gap-4"
+              }
+            `}
+          >
             <AnimatePresence>
               {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} product={product} view={view} />
               ))}
             </AnimatePresence>
           </div>
@@ -98,7 +145,7 @@ export default function App() {
           href={`https://wa.me/${phoneNumber}?text=${globalMessage}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-5 right-5 bg-emerald-500 w-14 h-14 rounded-full flex items-center justify-center text-white text-2xl shadow-lg hover:scale-110 transition"
+          className="fixed bottom-5 right-5 border border-black dark:border-white w-14 h-14 rounded-full flex items-center justify-center text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"
         >
           💬
         </a>
