@@ -4,7 +4,7 @@ import {products} from "./data/products";
 import ProductCard from "./components/ProductCard";
 import {LayoutGrid, List, Grid2X2, Sun, Moon} from "lucide-react";
 
-const phoneNumber = "5491162625807";
+const phoneNumber = "+5491123855226";
 
 export default function App() {
   const [search, setSearch] = useState("");
@@ -48,22 +48,22 @@ export default function App() {
   );
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-light dark:bg-primary text-primary dark:text-light transition-colors duration-300">
       <div className="max-w-md mx-auto px-4 py-8">
         <div className="max-w-md mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-6">
-            <h1 className="text-3xl font-semibold dark:text-white">
-              Venta por mudanza
+            <h1 className="text-3xl font-semibold dark:text-secondary">
+              Herbaria - Catálogo
             </h1>
             <button
               onClick={() => setDark(!dark)}
               className="
     p-2 rounded-full
-    border border-black dark:border-white
-    text-black dark:text-white
+    border border-primary dark:border-secondary
+    text-primary dark:text-secondary
     transition
-    hover:bg-black hover:text-white
-    dark:hover:bg-white dark:hover:text-black
+    hover:bg-primary hover:text-secondary
+    dark:hover:bg-secondary dark:hover:text-primary
   "
             >
               {dark ? (
@@ -81,7 +81,7 @@ export default function App() {
             placeholder="Buscar artículo..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full mb-4 px-4 py-3 rounded-2xl border border-black/20 dark:border-white/20 bg-white dark:bg-black dark:text-white focus:outline-none"
+            className="w-full mb-4 px-4 py-3 rounded-2xl border border-primary/20 dark:border-secondary/20 bg-light dark:bg-primary dark:text-secondary focus:outline-none"
           />
 
           <div className="flex gap-2 overflow-x-auto mb-4 pb-2">
@@ -89,11 +89,11 @@ export default function App() {
               <button
                 key={cat}
                 onClick={() => setCategory(cat)}
-                className={`px-2.5 py-0.5 rounded-full text-[11px] tracking-wide whitespace-nowrap transition
+                className={`px-2.5 py-0.5 rounded-full text-[11px] tracking-wide secondaryspace-nowrap transition
     ${
       category === cat
-        ? "bg-black text-white dark:bg-white dark:text-black"
-        : "border border-black/30 dark:border-white/30 dark:text-white"
+        ? "bg-primary text-secondary dark:bg-secondary dark:text-primary"
+        : "border border-primary/30 dark:border-secondary/30 dark:text-secondary"
     }`}
               >
                 {cat}
@@ -106,8 +106,8 @@ export default function App() {
               onClick={() => setView("cards")}
               className={`p-2 rounded-full transition ${
                 view === "cards"
-                  ? "bg-black text-white dark:bg-white dark:text-black"
-                  : "text-black/40 dark:text-white/40"
+                  ? "bg-primary text-secondary dark:bg-secondary dark:text-primary"
+                  : "text-primary/40 dark:text-secondary/40"
               }`}
             >
               <LayoutGrid size={20} />
@@ -117,8 +117,8 @@ export default function App() {
               onClick={() => setView("list")}
               className={`p-2 rounded-full transition ${
                 view === "list"
-                  ? "bg-black text-white dark:bg-white dark:text-black"
-                  : "text-black/40 dark:text-white/40"
+                  ? "bg-primary text-secondary dark:bg-secondary dark:text-primary"
+                  : "text-primary/40 dark:text-secondary/40"
               }`}
             >
               <List size={20} />
@@ -128,8 +128,8 @@ export default function App() {
               onClick={() => setView("compact")}
               className={`p-2 rounded-full transition ${
                 view === "compact"
-                  ? "bg-black text-white dark:bg-white dark:text-black"
-                  : "text-black/40 dark:text-white/40"
+                  ? "bg-primary text-secondary dark:bg-secondary dark:text-primary"
+                  : "text-primary/40 dark:text-secondary/40"
               }`}
             >
               <Grid2X2 size={20} />
@@ -158,7 +158,7 @@ export default function App() {
           href={`https://wa.me/${phoneNumber}?text=${globalMessage}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-5 right-5 border border-black dark:border-white w-14 h-14 rounded-full flex items-center justify-center text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition"
+          className="fixed bottom-5 right-5 border border-primary dark:border-secondary w-14 h-14 rounded-full flex items-center justify-center text-primary dark:text-secondary hover:bg-primary hover:text-secondary dark:hover:bg-secondary dark:hover:text-primary transition"
         >
           💬
         </a>

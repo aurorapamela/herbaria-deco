@@ -22,9 +22,7 @@ Estoy interesada en:
   const isList = view === "list";
   const isCompact = view === "compact";
 
-  const images = product.images || [
-    `${import.meta.env.BASE_URL}${product.image}`,
-  ];
+  const images = product.image || product.image[0];
 
   return (
     <>
@@ -58,7 +56,7 @@ Estoy interesada en:
           </div>
 
           {product.offer && (
-            <span className="absolute top-3 right-3 border border-black dark:border-white text-xs px-2 py-1 uppercase tracking-widest bg-white dark:bg-black">
+            <span className="absolute top-3 right-3 border border-primary rounded-full dark:border-secondary text-xs px-2 py-1 uppercase tracking-widest bg-secondary dark:bg-primary text-tertiary dark:text-secondary">
               Oferta
             </span>
           )}
