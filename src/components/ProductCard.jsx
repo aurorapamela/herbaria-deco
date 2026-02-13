@@ -5,6 +5,7 @@ const phoneNumber = "5491162625807";
 
 export default function ProductCard({product, view}) {
   const [open, setOpen] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
 
   const message = encodeURIComponent(
     `Hola! 👋
@@ -21,6 +22,10 @@ Estoy interesada en:
   const isList = view === "list";
   const isCompact = view === "compact";
 
+  const images = product.images || [
+    `${import.meta.env.BASE_URL}${product.image}`,
+  ];
+
   return (
     <>
       <motion.div
@@ -32,26 +37,25 @@ Estoy interesada en:
         className={`
           border border-black/10 dark:border-white/10
           rounded-2xl overflow-hidden
-          ${isList ? "flex gap-4 p-3 items-center" : ""}
+          ${isList ? "flex items-stretch" : ""}
         `}
       >
-        {/* Imagen */}
         <div
-          className={`relative cursor-pointer ${
-            isList ? "w-24 h-24 flex-shrink-0" : ""
-          }`}
-          onClick={() => setOpen(true)}
+          className={`relative cursor-pointer ${isList ? "w-1/2" : ""}`}
+          onClick={() => {
+            setCurrentImage(0);
+            setOpen(true);
+          }}
         >
-          <img
-            src={product.image}
-            alt={product.name}
-            className={`
-              object-cover
-              ${isList ? "w-24 h-24 rounded-xl" : ""}
-              ${isCompact ? "w-full h-40" : ""}
-              ${!isList && !isCompact ? "w-full h-64" : ""}
-            `}
-          />
+          <div className="aspect-square w-full">
+            <img
+              src={images[currentImage]}
+              alt={product.name}
+              className={`w-full h-full object-cover ${
+                isList ? "" : "rounded-xl"
+              }`}
+            />
+          </div>
 
           {product.offer && (
             <span className="absolute top-3 right-3 border border-black dark:border-white text-xs px-2 py-1 uppercase tracking-widest bg-white dark:bg-black">
@@ -60,10 +64,9 @@ Estoy interesada en:
           )}
         </div>
 
-        {/* Contenido */}
         <div
           className={`
-            ${isList ? "flex-1" : "p-5"}
+            ${isList ? "w-1/2 p-5 flex flex-col justify-center" : "p-5"}
             ${isCompact ? "p-3" : ""}
             space-y-2
           `}
@@ -72,7 +75,6 @@ Estoy interesada en:
             {product.name}
           </h2>
 
-          {/* Descripción NO en compact */}
           {!isCompact && (
             <p className="text-sm text-black/60 dark:text-white/60">
               {product.description}
@@ -83,7 +85,6 @@ Estoy interesada en:
             ${product.price.toLocaleString("es-AR")}
           </p>
 
-          {/* Botón NO en compact */}
           {!isCompact && product.status !== "sold" && (
             <a
               href={`https://wa.me/${phoneNumber}?text=${message}`}
@@ -97,16 +98,41 @@ Estoy interesada en:
         </div>
       </motion.div>
 
-      {/* Modal imagen */}
       {open && (
-        <div
-          onClick={() => setOpen(false)}
-          className="fixed inset-0 bg-white/95 dark:bg-black/95 flex items-center justify-center z-50"
-        >
+        <div className="fixed inset-0 bg-white/95 dark:bg-black/95 flex items-center justify-center z-50">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrentImage((prev) =>
+                prev === 0 ? images.length - 1 : prev - 1,
+              );
+            }}
+            className="absolute left-6 text-3xl"
+          >
+            ‹
+          </button>
+
           <img
-            src={product.image}
+            src={images[currentImage]}
             alt={product.name}
-            className="max-h-[85%] rounded-xl"
+            className="max-h-[85%] max-w-[90%] object-contain"
+          />
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setCurrentImage((prev) =>
+                prev === images.length - 1 ? 0 : prev + 1,
+              );
+            }}
+            className="absolute right-6 text-3xl"
+          >
+            ›
+          </button>
+
+          <div
+            onClick={() => setOpen(false)}
+            className="absolute inset-0 -z-10"
           />
         </div>
       )}

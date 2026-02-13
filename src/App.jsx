@@ -19,6 +19,12 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (dark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+
     localStorage.setItem("darkMode", dark);
   }, [dark]);
 
@@ -42,8 +48,8 @@ export default function App() {
   );
 
   return (
-    <div className={dark ? "dark" : ""}>
-      <div className="min-h-screen bg-white dark:bg-black transition-colors duration-300">
+    <div className="min-h-screen bg-white dark:bg-black text-black dark:text-white transition-colors duration-300">
+      <div className="max-w-md mx-auto px-4 py-8">
         <div className="max-w-md mx-auto px-4 py-8">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-3xl font-semibold dark:text-white">
@@ -51,9 +57,20 @@ export default function App() {
             </h1>
             <button
               onClick={() => setDark(!dark)}
-              className="p-2 rounded-full border border-black dark:border-white transition hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black"
+              className="
+    p-2 rounded-full
+    border border-black dark:border-white
+    text-black dark:text-white
+    transition
+    hover:bg-black hover:text-white
+    dark:hover:bg-white dark:hover:text-black
+  "
             >
-              {dark ? <Sun size={18} /> : <Moon size={18} />}
+              {dark ? (
+                <Sun size={18} strokeWidth={2} />
+              ) : (
+                <Moon size={18} strokeWidth={2} />
+              )}
             </button>
           </div>
 
@@ -67,18 +84,17 @@ export default function App() {
             className="w-full mb-4 px-4 py-3 rounded-2xl border border-black/20 dark:border-white/20 bg-white dark:bg-black dark:text-white focus:outline-none"
           />
 
-          {/* Categorías */}
           <div className="flex gap-2 overflow-x-auto mb-4 pb-2">
             {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setCategory(cat)}
-                className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition
-                  ${
-                    category === cat
-                      ? "bg-black text-white dark:bg-white dark:text-black"
-                      : "border border-black/20 dark:border-white/20 dark:text-white"
-                  }`}
+                className={`px-2.5 py-0.5 rounded-full text-[11px] tracking-wide whitespace-nowrap transition
+    ${
+      category === cat
+        ? "bg-black text-white dark:bg-white dark:text-black"
+        : "border border-black/30 dark:border-white/30 dark:text-white"
+    }`}
               >
                 {cat}
               </button>
@@ -120,7 +136,6 @@ export default function App() {
             </button>
           </div>
 
-          {/* Productos */}
           <div
             className={`
               ${
@@ -139,8 +154,6 @@ export default function App() {
             </AnimatePresence>
           </div>
         </div>
-
-        {/* WhatsApp flotante */}
         <a
           href={`https://wa.me/${phoneNumber}?text=${globalMessage}`}
           target="_blank"
