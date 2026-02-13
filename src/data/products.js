@@ -41,4 +41,14 @@ export const products = [
     status: "available",
     offer: false,
   },
+  {
+    id: 4,
+    name: "Sillas Plegables x 2",
+    price: 40000,
+    description: "Silla Reforzada Reposera Plegable 120kg",
+    images: [`${import.meta.env.BASE_URL}assets/silla.jpeg`],
+    category: "Mueble",
+    status: "available",
+    offer: false,
+  },
 ];
