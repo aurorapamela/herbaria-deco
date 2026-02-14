@@ -14,10 +14,10 @@ export const products = [
     id: 1,
     name: "Flor de Lienzo",
     packs: [
-      {qty: 4, price: 21000},
+      {qty: 4, price: 19000},
       {qty: 6, price: 29000},
-      {qty: 8, price: 36000},
-      {qty: 12, price: 52000},
+      {qty: 8, price: 39000},
+      {qty: 12, price: 58000},
     ],
     title: "Flores de Lienzo",
     description: [
@@ -46,10 +46,10 @@ export const products = [
     id: 2,
     name: "Flores Difusoras",
     packs: [
-      {qty: 4, price: 21000},
+      {qty: 4, price: 19000},
       {qty: 6, price: 29000},
-      {qty: 8, price: 36000},
-      {qty: 12, price: 52000},
+      {qty: 8, price: 39000},
+      {qty: 12, price: 58000},
     ],
     title: "Flores difusoras",
     description: ["Diámetro cada flor: ", "Largo total: 20 cm"],
