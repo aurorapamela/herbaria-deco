@@ -47,7 +47,7 @@ Estoy interesada en:
           >
             <div className="aspect-square w-full relative">
               <img
-                src={images[currentImage]}
+                src={images[currentImage].src}
                 alt={product.name}
                 className="w-full h-full object-cover rounded-xl"
               />
@@ -78,13 +78,30 @@ Estoy interesada en:
                 ›
               </button>
             </div>
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1">
+            {/* <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 my-8">
               {images.map((_, i) => (
                 <span
                   key={i}
                   className={`w-2 h-2 rounded-full ${
                     i === currentImage ? "bg-primary" : "bg-light/60"
                   }`}
+                />
+              ))}
+            </div> */}
+            <div className="flex gap-2 justify-center mt-2">
+              {images.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentImage(i);
+                  }}
+                  className={`w-4 h-4 rounded-full border ${
+                    i === currentImage
+                      ? "border-dark scale-110"
+                      : "border-primary/30"
+                  }`}
+                  style={{backgroundColor: img.color}}
                 />
               ))}
             </div>
