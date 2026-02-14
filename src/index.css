@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media (min-width: 1024px) {
+  body {
+    cursor: auto;
+  }
+}
+
+.leaf-follower {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  width: 14px;
+  height: 14px;
+  transition: transform 0.15s ease-out;
+  opacity: 0.6;
+}
+
+.leaf-follower img {
+  width: 100%;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* micro movimiento */
+
+@keyframes float {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+/* desktop only */
+
+@media (max-width: 1024px) {
+  .leaf-follower {
+    display: none;
+  }
+}

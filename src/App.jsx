@@ -1,3 +1,4 @@
+import LeafFollower from "./components/LeafFollower";
 import {useState, useMemo, useEffect} from "react";
 import {motion, AnimatePresence} from "framer-motion";
 import {products} from "./data/products";
@@ -49,6 +50,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-light dark:bg-primary text-primary dark:text-light transition-colors duration-300">
+      <LeafFollower />
       <div className="max-w-md mx-auto px-4 py-4">
         <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex justify-between items-center mb-6">
