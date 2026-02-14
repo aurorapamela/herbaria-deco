@@ -7,6 +7,10 @@ const phoneNumber = "5491162625807";
 export default function ProductCard({product, view}) {
   const [open, setOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
+  const [selectedPack, setSelectedPack] = useState(product.packs[0]);
+
+  const fullName = `${product.name} – Pack x ${selectedPack.qty} unidades`;
+  const fullTitle = `Pack de ${selectedPack.qty} unidades`;
 
   const images = product.image;
 
@@ -18,6 +22,12 @@ export default function ProductCard({product, view}) {
     }, {});
   }, [images]);
 
+  const COLOR_MAP = {
+    natural: "#E6D8C3",
+    beige: "#D8CFC4",
+    amarillo: "#F3D037",
+  };
+
   const colorKeys = Object.keys(groupedImages);
   const [selectedColor, setSelectedColor] = useState(colorKeys[0]);
 
@@ -26,8 +36,9 @@ export default function ProductCard({product, view}) {
   const message = encodeURIComponent(
     `Hola! 👋
 Estoy interesada en:
-🛍️ ${product.name}
-💲 $${product.price.toLocaleString("es-AR")}
+🛍️ ${fullName}
+📦 Pack x ${selectedPack.qty}
+💲 $${selectedPack.price.toLocaleString("es-AR")}
 Color: ${selectedColor}
 ¿Sigue disponible?`,
   );
@@ -54,35 +65,56 @@ Color: ${selectedColor}
             }}
           >
             <div className="aspect-square w-full relative">
-              <img
+              <motion.img
+                key={filteredImages[currentImage].src}
                 src={filteredImages[currentImage].src}
                 alt={product.name}
+                initial={{opacity: 0.4}}
+                animate={{opacity: 1}}
+                transition={{duration: 0.3}}
                 className="w-full h-full object-cover rounded-xl"
               />
+              {filteredImages.length > 1 && (
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
+                  {filteredImages.map((_, i) => (
+                    <span
+                      key={i}
+                      className={`
+          w-2 h-2 rounded-full transition
+          ${i === currentImage ? "bg-primary scale-125" : "bg-primary/30"}
+        `}
+                    />
+                  ))}
+                </div>
+              )}
 
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentImage((prev) =>
-                    prev === 0 ? filteredImages.length - 1 : prev - 1,
-                  );
-                }}
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-light/80 dark:bg-primary/80 rounded-full px-2"
-              >
-                ‹
-              </button>
+              {filteredImages.length > 1 && (
+                <>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCurrentImage((prev) =>
+                        prev === 0 ? filteredImages.length - 1 : prev - 1,
+                      );
+                    }}
+                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-light/80 dark:bg-primary/80 rounded-full px-2"
+                  >
+                    ‹
+                  </button>
 
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentImage((prev) =>
-                    prev === filteredImages.length - 1 ? 0 : prev + 1,
-                  );
-                }}
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-light/80 dark:bg-primary/80 rounded-full px-2"
-              >
-                ›
-              </button>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setCurrentImage((prev) =>
+                        prev === filteredImages.length - 1 ? 0 : prev + 1,
+                      );
+                    }}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-light/80 dark:bg-primary/80 rounded-full px-2"
+                  >
+                    ›
+                  </button>
+                </>
+              )}
             </div>
 
             {product.offer && (
@@ -93,78 +125,117 @@ Color: ${selectedColor}
           </div>
         )}
 
-        <div className="px-5 pt-3">
-          <label className="text-xs uppercase tracking-wide opacity-50">
-            Color
-          </label>
+        {colorKeys.length > 1 && (
+          <div className="px-5 pt-3">
+            <label className="text-xs uppercase tracking-wide">Color</label>
 
-          <div className="relative mt-1">
-            <span
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border"
-              style={{backgroundColor: selectedColor}}
-            />
-            <div className="relative w-full">
-              <select
-                value={selectedColor}
-                onChange={(e) => {
-                  setSelectedColor(e.target.value);
-                  setCurrentImage(0);
-                }}
-                className="
-      w-full
-      appearance-none
-      pl-8 pr-12 py-2
-      border border-primary/20
-      rounded-xl
-      text-sm
-      bg-transparent
-      focus:border-primary
-      outline-none
-    "
-              >
-                {colorKeys.map((color) => (
-                  <option key={color} value={color}>
-                    {color}
-                  </option>
-                ))}
-              </select>
-
-              <ChevronDown
-                size={16}
-                className="
-      pointer-events-none
-      absolute
-      right-4
-      top-1/2
-      -translate-y-1/2
-      text-primary/90
-    "
+            <div className="relative mt-1">
+              <span
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border"
+                style={{backgroundColor: COLOR_MAP[selectedColor]}}
               />
+              <div className="relative w-full">
+                <select
+                  value={selectedColor}
+                  onChange={(e) => {
+                    setSelectedColor(e.target.value);
+                    setCurrentImage(0);
+                  }}
+                  className="
+  w-full
+  appearance-none
+  pl-8 pr-12 py-2
+  border border-primary/30 dark:border-secondary/30
+  rounded-xl
+  text-sm
+  bg-transparent
+  focus:border-primary dark:focus:border-secondary
+  outline-none
+"
+                >
+                  {colorKeys.map((color) => (
+                    <option
+                      key={color}
+                      value={color}
+                      style={{
+                        backgroundColor: COLOR_MAP[color],
+                        color: "#000",
+                      }}
+                    >
+                      {color}
+                    </option>
+                  ))}
+                </select>
+
+                <ChevronDown
+                  size={16}
+                  className="
+    pointer-events-none
+    absolute
+    right-4
+    top-1/2
+    -translate-y-1/2
+    text-primary/90 dark:text-secondary/80
+  "
+                />
+              </div>
             </div>
           </div>
-        </div>
+        )}
+
+        {product.packs.length > 1 && (
+          <div className="px-5 pt-3">
+            <label className="text-xs uppercase tracking-wide">Cantidad</label>
+
+            <select
+              value={selectedPack.qty}
+              onChange={(e) =>
+                setSelectedPack(
+                  product.packs.find((p) => p.qty === Number(e.target.value)),
+                )
+              }
+              className="
+        w-full
+        mt-1
+        border border-primary/20 dark:border-secondary/20
+        rounded-xl
+        py-2 px-3
+        text-sm
+        bg-transparent
+        outline-none
+      "
+            >
+              {product.packs.map((pack) => (
+                <option key={pack.qty} value={pack.qty}>
+                  Pack x {pack.qty}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
         <div
           className={`
             ${isList ? "w-full p-5 flex flex-col justify-center" : "p-5"}
             ${isCompact ? "p-3" : ""}
-            space-y-2
+            space-y-1 
           `}
         >
-          <h2 className="font-medium text-lg">{product.name}</h2>
+          <h2 className="font-medium text-xl">{fullName}</h2>
 
-          <p className="text-sm opacity-60">{product.title}</p>
+          {/* <p className="text-sm">{fullTitle}</p> */}
+          <p className="font-semibold text-lg">
+            ${selectedPack.price.toLocaleString("es-AR")}
+          </p>
 
-          <div className="text-sm opacity-60">
+          <div className="text-sm">
             {product.description.map((line, i) => (
               <p key={i}>{line}</p>
             ))}
           </div>
 
-          <p className="text-sm">{product.conditions}</p>
-
-          <p className="font-semibold pb-2">
-            ${product.price.toLocaleString("es-AR")}
+          <p className="text-sm text-tertiary dark:text-accent pb-4">
+            {product.conditions}
           </p>
 
           {!isCompact && product.status !== "sold" && (
@@ -181,36 +252,40 @@ Color: ${selectedColor}
       </motion.div>
 
       {open && (
-        <div className="fixed inset-0 bg-secondary/95 flex items-center justify-center z-50">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setCurrentImage((prev) =>
-                prev === 0 ? filteredImages.length - 1 : prev - 1,
-              );
-            }}
-            className="absolute left-6 text-3xl"
-          >
-            ‹
-          </button>
+        <div className="fixed inset-0 bg-primary/50 flex items-center justify-center z-50 dark:bg-dark/95">
+          {filteredImages.length > 1 && (
+            <>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentImage((prev) =>
+                    prev === 0 ? filteredImages.length - 1 : prev - 1,
+                  );
+                }}
+                className="absolute left-6 text-3xl"
+              >
+                ‹
+              </button>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setCurrentImage((prev) =>
+                    prev === filteredImages.length - 1 ? 0 : prev + 1,
+                  );
+                }}
+                className="absolute right-6 text-3xl"
+              >
+                ›
+              </button>
+            </>
+          )}
 
           <img
             src={filteredImages[currentImage].src}
-            alt={product.name}
+            alt={fullName}
             className="max-h-[85%] max-w-[90%] object-contain"
           />
-
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              setCurrentImage((prev) =>
-                prev === filteredImages.length - 1 ? 0 : prev + 1,
-              );
-            }}
-            className="absolute right-6 text-3xl"
-          >
-            ›
-          </button>
 
           <div
             onClick={() => setOpen(false)}

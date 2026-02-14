@@ -12,9 +12,14 @@ const getDeliveryDate = () => {
 export const products = [
   {
     id: 1,
-    name: "Flor de Lienzo - Pack x 6 unidades",
-    price: 29000,
-    title: "Pack de 6 unidades de Flores de Lienzo",
+    name: "Flor de Lienzo",
+    packs: [
+      {qty: 4, price: 21000},
+      {qty: 6, price: 29000},
+      {qty: 8, price: 36000},
+      {qty: 12, price: 52000},
+    ],
+    title: "Flores de Lienzo",
     description: [
       "Diámetro cada flor: 10 cm",
       "Largo total (incluye tallo): 30 cm",
@@ -29,17 +34,24 @@ export const products = [
       {src: "/assets/lienzo/lienzo-9.jpeg", color: "natural"},
       {src: "/assets/lienzo/lienzo-10.jpeg", color: "natural"},
       {src: "/assets/lienzo/lienzo-11.jpeg", color: "natural"},
-      {src: "/assets/lienzo/lienzo-12.jpeg", color: "natural"},
+      {src: "/assets/lienzo/lienzo-blanca-1.jpeg", color: "blanco"},
+      {src: "/assets/lienzo/lienzo-blanca-2.jpeg", color: "blanco"},
+      {src: "/assets/lienzo/lienzo-blanca-3.jpeg", color: "blanco"},
     ],
     category: "Flores lienzo",
     status: "available",
-    offer: true,
+    offer: false,
   },
   {
     id: 2,
-    name: "Flores Difusoras - Pack x 10 unidades",
-    price: 29000,
-    title: "Pack de 10 unidades de flores difusoras",
+    name: "Flores Difusoras",
+    packs: [
+      {qty: 4, price: 21000},
+      {qty: 6, price: 29000},
+      {qty: 8, price: 36000},
+      {qty: 12, price: 52000},
+    ],
+    title: "Flores difusoras",
     description: ["Diámetro cada flor: ", "Largo total: 20 cm"],
     conditions: `Entrega estimada: ${getDeliveryDate()} (incluye 3 días de producción)`,
     image: [
