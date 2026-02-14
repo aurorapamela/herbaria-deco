@@ -46,7 +46,7 @@ export const products = [
       {src: "/assets/difusora/difusoras-01.jpeg", color: "#E6D8C3"},
       {src: "/assets/difusora/difusoras-09.jpeg", color: "#dea8d0"},
       {src: "/assets/difusora/difusoras-18.jpeg", color: "#e8976f"},
-      {src: "/assets/difusora/difusoras-18.jpeg", color: "#f3d037"},
+      {src: "/assets/difusora/difusoras-29.jpeg", color: "#f3d037"},
     ],
     category: "Flores difusoras",
     status: "available",

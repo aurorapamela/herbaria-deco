@@ -49,8 +49,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-light dark:bg-primary text-primary dark:text-light transition-colors duration-300">
-      <div className="max-w-md mx-auto px-4 py-8">
-        <div className="max-w-md mx-auto px-4 py-8">
+      <div className="max-w-md mx-auto px-4 py-4">
+        <div className="max-w-md mx-auto px-4 py-4">
           <div className="flex justify-between items-center mb-6">
             <h1 className="text-3xl font-semibold dark:text-secondary">
               Herbaria - Catálogo
