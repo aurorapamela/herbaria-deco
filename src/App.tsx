@@ -23,7 +23,7 @@ export default function App() {
   }, [dark]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-light dark:bg-primary text-primary dark:text-light transition-colors duration-300">
+    <div className="min-h-screen flex flex-col bg-light dark:bg-primary text-primary dark:text-light">
       <LeafFollower />
       <ProductGrid dark={dark} setDark={setDark} />
       <Footer dark={dark} />

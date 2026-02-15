@@ -74,7 +74,7 @@ export default function ProductGrid({dark, setDark}: ProductGridProps) {
         />
 
         <div className="flex gap-2 overflow-x-auto mb-4 pb-2">
-          {categories.map((cat) => (
+          {categories.map((cat: string) => (
             <button
               key={cat}
               onClick={() => setCategory(cat)}
@@ -90,7 +90,7 @@ export default function ProductGrid({dark, setDark}: ProductGridProps) {
           ))}
         </div>
 
-        <div className="md:hidden flex justify-end gap-6 mb-6">
+        <div className="hidden flex justify-end gap-6 mb-6">
           <button
             onClick={() => setView("cards")}
             className={`p-2 rounded-full transition ${
@@ -146,18 +146,17 @@ export default function ProductGrid({dark, setDark}: ProductGridProps) {
       <a
         href={`https://wa.me/${PHONE_NUMBER}?text=${GLOBAL_MESSAGE}`}
         target="_blank"
-        rel="noopener noreferrer"
         className="
-    fixed bottom-5 right-5
-    w-14 h-14 rounded-full
-    flex items-center justify-center
-    bg-primary text-secondary
-    dark:bg-secondary dark:text-primary
-    shadow-lg
-    hover:scale-105 transition
-  "
+fixed bottom-4 right-4 z-40
+w-12 h-12
+rounded-full
+flex items-center justify-center
+bg-primary text-secondary
+dark:bg-secondary dark:text-primary
+shadow-lg
+"
       >
-        <MessageCircle size={22} strokeWidth={1.5} />
+        <MessageCircle size={20} />
       </a>
     </div>
   );
