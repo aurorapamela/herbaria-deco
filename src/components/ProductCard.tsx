@@ -3,6 +3,7 @@ import {motion} from "framer-motion";
 import {ChevronDown} from "lucide-react";
 import {Product} from "@/types/product";
 import {PHONE_NUMBER} from "../constants/whatsapp";
+import {COLOR_MAP} from "@/constants/colors";
 
 interface ProductCardProps {
   product: Product;
@@ -14,7 +15,7 @@ export default function ProductCard({product}: ProductCardProps) {
   const [currentImage, setCurrentImage] = useState(0);
   const [selectedPack, setSelectedPack] = useState(product.packs[0]);
 
-  const fullName = `${product.name} – Pack x ${selectedPack.qty} unidades`;
+  const fullName = `${product.name}`;
   const fullTitle = `Pack de ${selectedPack.qty} unidades`;
 
   const images = product.image;
@@ -26,12 +27,6 @@ export default function ProductCard({product}: ProductCardProps) {
       return acc;
     }, {});
   }, [images]);
-
-  const COLOR_MAP = {
-    natural: "#E6D8C3",
-    beige: "#D8CFC4",
-    amarillo: "#F3D037",
-  };
 
   const colorKeys = Object.keys(groupedImages);
   const [selectedColor, setSelectedColor] = useState(colorKeys[0]);
@@ -187,30 +182,44 @@ Color: ${selectedColor}
           <div className="px-5 pt-3">
             <label className="text-xs uppercase tracking-wide">Cantidad</label>
 
-            <select
-              value={selectedPack.qty}
-              onChange={(e) =>
-                setSelectedPack(
-                  product.packs.find((p) => p.qty === Number(e.target.value)),
-                )
-              }
-              className="
-        w-full
-        mt-1
-        border border-primary/20 dark:border-secondary/20
-        rounded-xl
-        py-2 px-3
-        text-sm
-        bg-transparent
-        outline-none
-      "
-            >
-              {product.packs.map((pack) => (
-                <option key={pack.qty} value={pack.qty}>
-                  Pack x {pack.qty}
-                </option>
-              ))}
-            </select>
+            <div className="relative w-full mt-1">
+              <select
+                value={selectedPack.qty}
+                onChange={(e) =>
+                  setSelectedPack(
+                    product.packs.find((p) => p.qty === Number(e.target.value)),
+                  )
+                }
+                className="
+  w-full
+  appearance-none
+  pl-4 pr-12 py-2
+  border border-primary/30 dark:border-secondary/30
+  rounded-xl
+  text-sm
+  bg-transparent
+  focus:border-primary dark:focus:border-secondary
+  outline-none
+"
+              >
+                {product.packs.map((pack) => (
+                  <option key={pack.qty} value={pack.qty}>
+                    Pack x {pack.qty}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown
+                size={16}
+                className="
+    pointer-events-none
+    absolute
+    right-4
+    top-1/2
+    -translate-y-1/2
+    text-primary/90 dark:text-secondary/80
+  "
+              />
+            </div>
           </div>
         )}
 
@@ -220,7 +229,8 @@ Color: ${selectedColor}
             space-y-1 
           `}
         >
-          <h2 className="font-medium text-xl">{fullName}</h2>
+          <h2 className="font-bold text-xl">{fullName}</h2>
+          <h3 className="font-medium text-lg">{fullTitle}</h3>
 
           {/* <p className="text-sm">{fullTitle}</p> */}
           <p className="font-semibold text-lg">
