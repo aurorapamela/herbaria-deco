@@ -1,9 +1,17 @@
 import LeafFollower from "./components/LeafFollower";
 import {useState, useMemo, useEffect} from "react";
-import {motion, AnimatePresence} from "framer-motion";
+import {motion, useScroll, useTransform, AnimatePresence} from "framer-motion";
 import {products} from "./data/products";
 import ProductCard from "./components/ProductCard";
-import {LayoutGrid, List, Grid2X2, Sun, Moon} from "lucide-react";
+import {
+  LayoutGrid,
+  List,
+  Grid2X2,
+  Sun,
+  Moon,
+  MessageCircle,
+  InstagramIcon,
+} from "lucide-react";
 
 const phoneNumber = "+5491123855226";
 
@@ -12,6 +20,9 @@ export default function App() {
   const [category, setCategory] = useState("Todos");
   const [dark, setDark] = useState(false);
   const [view, setView] = useState("cards"); // cards | list | compact
+
+  const {scrollY} = useScroll();
+  const rotateOnScroll = useTransform(scrollY, [0, 300], [0, 6]);
 
   // Persist dark mode
   useEffect(() => {
@@ -160,11 +171,90 @@ export default function App() {
           href={`https://wa.me/${phoneNumber}?text=${globalMessage}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-5 right-5 border border-primary dark:border-secondary w-14 h-14 rounded-full flex items-center justify-center text-primary dark:text-secondary hover:bg-primary hover:text-secondary dark:hover:bg-secondary dark:hover:text-primary transition"
+          className="
+    fixed bottom-5 right-5
+    w-14 h-14 rounded-full
+    flex items-center justify-center
+    bg-primary text-secondary
+    dark:bg-secondary dark:text-primary
+    shadow-lg
+    hover:scale-105 transition
+  "
         >
-          💬
+          <MessageCircle size={22} strokeWidth={1.5} />
         </a>
       </div>
+      <footer className="mt-8 border-t border-primary/20 dark:border-secondary/20 py-6">
+        <div className="max-w-md mx-auto px-4 flex flex-col items-center gap-2 text-xs text-primary/70 dark:text-secondary/70">
+          <motion.img
+            src={
+              document.documentElement.classList.contains("dark")
+                ? "/leaf-light.svg"
+                : "/leaf-dark.svg"
+            }
+            alt="Herbaria"
+            className="w-6 opacity-90 select-none"
+            style={{rotate: rotateOnScroll}}
+            animate={{scale: [1, 1.05, 1]}}
+            whileHover={{
+              rotate: 10,
+              scale: 1.2,
+            }}
+            transition={{
+              scale: {
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+              hover: {
+                type: "spring",
+                stiffness: 200,
+              },
+            }}
+          />
+
+          <p>© {new Date().getFullYear()} Herbaria Deco</p>
+
+          <p className="text-center">
+            Hecho a mano · Producción artesanal · Lanús · Buenos Aires
+          </p>
+
+          {/* Redes */}
+          <div className="flex gap-5 pt-2">
+            <a
+              href="https://instagram.com/herbaria.deco"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+      p-2 rounded-full
+      border border-primary/30 dark:border-secondary/30
+      text-primary dark:text-secondary
+      hover:bg-primary hover:text-secondary
+      dark:hover:bg-secondary dark:hover:text-primary
+      transition
+    "
+            >
+              <InstagramIcon size={16} strokeWidth={1.5} />
+            </a>
+
+            <a
+              href={`https://wa.me/${phoneNumber}?text=${globalMessage}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="
+      p-2 rounded-full
+      border border-primary/30 dark:border-secondary/30
+      text-primary dark:text-secondary
+      hover:bg-primary hover:text-secondary
+      dark:hover:bg-secondary dark:hover:text-primary
+      transition
+    "
+            >
+              <MessageCircle size={16} strokeWidth={1.5} />
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
