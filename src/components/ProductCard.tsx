@@ -1,10 +1,15 @@
 import {useState, useMemo} from "react";
 import {motion} from "framer-motion";
 import {ChevronDown} from "lucide-react";
+import {Product} from "@/types/product";
+import {PHONE_NUMBER} from "../constants/whatsapp";
 
-const phoneNumber = "5491162625807";
+interface ProductCardProps {
+  product: Product;
+  view?: string;
+}
 
-export default function ProductCard({product, view}) {
+export default function ProductCard({product}: ProductCardProps) {
   const [open, setOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const [selectedPack, setSelectedPack] = useState(product.packs[0]);
@@ -43,9 +48,6 @@ Color: ${selectedColor}
 ¿Sigue disponible?`,
   );
 
-  const isList = view === "list";
-  const isCompact = view === "compact";
-
   return (
     <>
       <motion.div
@@ -56,74 +58,72 @@ Color: ${selectedColor}
         transition={{duration: 0.3}}
         className="border border-primary/10 dark:border-secondary/10 rounded-2xl overflow-hidden"
       >
-        {!isList && (
-          <div
-            className="relative cursor-pointer"
-            onClick={() => {
-              setCurrentImage(0);
-              setOpen(true);
-            }}
-          >
-            <div className="aspect-square w-full relative">
-              <motion.img
-                key={filteredImages[currentImage].src}
-                src={filteredImages[currentImage].src}
-                alt={product.name}
-                initial={{opacity: 0.4}}
-                animate={{opacity: 1}}
-                transition={{duration: 0.3}}
-                className="w-full h-full object-cover rounded-xl"
-              />
-              {filteredImages.length > 1 && (
-                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
-                  {filteredImages.map((_, i) => (
-                    <span
-                      key={i}
-                      className={`
+        <div
+          className="relative cursor-pointer"
+          onClick={() => {
+            setCurrentImage(0);
+            setOpen(true);
+          }}
+        >
+          <div className="aspect-square w-full relative">
+            <motion.img
+              key={filteredImages[currentImage].src}
+              src={filteredImages[currentImage].src}
+              alt={product.name}
+              initial={{opacity: 0.4}}
+              animate={{opacity: 1}}
+              transition={{duration: 0.3}}
+              className="w-full h-full object-cover rounded-xl"
+            />
+            {filteredImages.length > 1 && (
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
+                {filteredImages.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`
           w-2 h-2 rounded-full transition
           ${i === currentImage ? "bg-primary scale-125" : "bg-primary/30"}
         `}
-                    />
-                  ))}
-                </div>
-              )}
+                  />
+                ))}
+              </div>
+            )}
 
-              {filteredImages.length > 1 && (
-                <>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setCurrentImage((prev) =>
-                        prev === 0 ? filteredImages.length - 1 : prev - 1,
-                      );
-                    }}
-                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-light/80 dark:bg-primary/80 rounded-full px-2"
-                  >
-                    ‹
-                  </button>
+            {filteredImages.length > 1 && (
+              <>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentImage((prev) =>
+                      prev === 0 ? filteredImages.length - 1 : prev - 1,
+                    );
+                  }}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 bg-light/80 dark:bg-primary/80 rounded-full px-2"
+                >
+                  ‹
+                </button>
 
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setCurrentImage((prev) =>
-                        prev === filteredImages.length - 1 ? 0 : prev + 1,
-                      );
-                    }}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-light/80 dark:bg-primary/80 rounded-full px-2"
-                  >
-                    ›
-                  </button>
-                </>
-              )}
-            </div>
-
-            {product.offer && (
-              <span className="absolute top-3 right-3 border border-tertiary rounded-full text-xs px-2 py-1 uppercase tracking-widest bg-light text-tertiary">
-                Oferta
-              </span>
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentImage((prev) =>
+                      prev === filteredImages.length - 1 ? 0 : prev + 1,
+                    );
+                  }}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-light/80 dark:bg-primary/80 rounded-full px-2"
+                >
+                  ›
+                </button>
+              </>
             )}
           </div>
-        )}
+
+          {product.offer && (
+            <span className="absolute top-3 right-3 border border-tertiary rounded-full text-xs px-2 py-1 uppercase tracking-widest bg-light text-tertiary">
+              Oferta
+            </span>
+          )}
+        </div>
 
         {colorKeys.length > 1 && (
           <div className="px-5 pt-3">
@@ -216,8 +216,7 @@ Color: ${selectedColor}
 
         <div
           className={`
-            ${isList ? "w-full p-5 flex flex-col justify-center" : "p-5"}
-            ${isCompact ? "p-3" : ""}
+            ${"p-5"}
             space-y-1 
           `}
         >
@@ -238,9 +237,9 @@ Color: ${selectedColor}
             {product.conditions}
           </p>
 
-          {!isCompact && product.status !== "sold" && (
+          {product.status !== "sold" && (
             <a
-              href={`https://wa.me/${phoneNumber}?text=${message}`}
+              href={`https://wa.me/${PHONE_NUMBER}?text=${message}`}
               target="_blank"
               rel="noopener noreferrer"
               className="block w-full text-center border py-2 rounded-full hover:bg-primary hover:text-secondary transition text-sm"

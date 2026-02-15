@@ -1,3 +1,5 @@
+import type {Product} from "@/types/product";
+
 const getDeliveryDate = () => {
   const today = new Date();
   today.setDate(today.getDate() + 3);
@@ -9,7 +11,7 @@ const getDeliveryDate = () => {
   });
 };
 
-export const products = [
+export const products: Product[] = [
   {
     id: 1,
     name: "Flor de Lienzo",

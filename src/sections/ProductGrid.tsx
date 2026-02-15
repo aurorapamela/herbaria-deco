@@ -1,13 +1,6 @@
 import ProductCard from "@/components/ProductCard";
 import {AnimatePresence, motion} from "framer-motion";
-import {
-  Grid2X2,
-  LayoutGrid,
-  List,
-  MessageCircle,
-  Moon,
-  Sun,
-} from "lucide-react";
+import {MessageCircle, Moon, Sun} from "lucide-react";
 import {useMemo, useState} from "react";
 import {products} from "../data/products";
 import {GLOBAL_MESSAGE, PHONE_NUMBER} from "../constants/whatsapp";
@@ -20,7 +13,6 @@ interface ProductGridProps {
 export default function ProductGrid({dark, setDark}: ProductGridProps) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Todos");
-  const [view, setView] = useState("cards"); // cards | list | compact
 
   const categories = ["Todos", ...new Set(products.map((p) => p.category))];
 
@@ -38,8 +30,10 @@ export default function ProductGrid({dark, setDark}: ProductGridProps) {
   }, [search, category]);
 
   return (
-    <div className="max-w-md mx-auto px-4 py-4">
-      <div className="max-w-md mx-auto px-4 py-4">
+    <div
+    // className="max-w-md mx-auto px-4 py-4"
+    >
+      <div className="mx-auto px-4 py-4">
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-3xl font-semibold dark:text-secondary">
             Herbaria - Catálogo
@@ -70,7 +64,7 @@ export default function ProductGrid({dark, setDark}: ProductGridProps) {
           placeholder="Buscar artículo..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full mb-4 px-4 py-3 rounded-2xl border border-primary/20 dark:border-secondary/20 bg-light dark:bg-primary dark:text-secondary focus:outline-none"
+          className="w-96 mb-4 px-4 py-3 rounded-2xl border border-primary/20 dark:border-secondary/20 bg-light dark:bg-primary dark:text-secondary focus:outline-none"
         />
 
         <div className="flex gap-2 overflow-x-auto mb-4 pb-2">
@@ -90,55 +84,10 @@ export default function ProductGrid({dark, setDark}: ProductGridProps) {
           ))}
         </div>
 
-        <div className="hidden flex justify-end gap-6 mb-6">
-          <button
-            onClick={() => setView("cards")}
-            className={`p-2 rounded-full transition ${
-              view === "cards"
-                ? "bg-primary text-secondary dark:bg-secondary dark:text-primary"
-                : "text-primary/40 dark:text-secondary/40"
-            }`}
-          >
-            <LayoutGrid size={20} />
-          </button>
-
-          <button
-            onClick={() => setView("list")}
-            className={`p-2 rounded-full transition ${
-              view === "list"
-                ? "bg-primary text-secondary dark:bg-secondary dark:text-primary"
-                : "text-primary/40 dark:text-secondary/40"
-            }`}
-          >
-            <List size={20} />
-          </button>
-
-          <button
-            onClick={() => setView("compact")}
-            className={`p-2 rounded-full transition ${
-              view === "compact"
-                ? "bg-primary text-secondary dark:bg-secondary dark:text-primary"
-                : "text-primary/40 dark:text-secondary/40"
-            }`}
-          >
-            <Grid2X2 size={20} />
-          </button>
-        </div>
-
-        <div
-          className={`
-              ${
-                view === "compact"
-                  ? "grid grid-cols-2 gap-3"
-                  : view === "cards"
-                    ? "grid grid-cols-1 gap-6"
-                    : "flex flex-col gap-4"
-              }
-            `}
-        >
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <AnimatePresence>
             {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} view={view} />
+              <ProductCard key={product.id} product={product} />
             ))}
           </AnimatePresence>
         </div>
