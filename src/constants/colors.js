@@ -11,6 +11,7 @@ export const COLOR_MAP = {
   naranja: "#F28C28",
   rojo: "#C0392B",
   rosa: "#E8A1B0",
+  fucsia: "#eb13e4",
   nude: "#EAD3B0",
   verde: "#6B8E23",
   verde_oliva: "#7A8450",

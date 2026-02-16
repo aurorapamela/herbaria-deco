@@ -65,6 +65,69 @@ const productsData: ProductBase[] = [
     offer: false,
   },
   {
+    name: "Flores Difusoras Margaritas",
+    packs: [
+      {qty: 4, price: 18600},
+      {qty: 6, price: 28000},
+      {qty: 8, price: 37500},
+      {qty: 10, price: 46500},
+      {qty: 12, price: 55000},
+    ],
+    title: "Margaritas eternas",
+    description: ["Diámetro cada flor: ", "Largo total: "],
+    conditions: `Entrega estimada: ${getDeliveryDate(5)} (incluye 5 días de producción)`,
+    image: [
+      {src: "/assets/difusoras-margarita/margaritas-02.jpeg", color: "blanco"},
+      {src: "/assets/difusoras-margarita/margaritas-01.jpeg", color: "blanco"},
+      {src: "/assets/difusoras-margarita/margaritas-03.jpeg", color: "blanco"},
+    ],
+    category: "difusoras margaritas",
+    status: "available",
+    offer: false,
+  },
+  {
+    name: "Hortensia",
+    packs: [
+      {qty: 4, price: 23000},
+      {qty: 8, price: 46000},
+    ],
+    title: "Flor Hortensia de tela",
+    description: [
+      "Diámetro cada flor: 11 cm",
+      "Largo total (incluye tallo): 30 cm",
+    ],
+    conditions: `Entrega estimada: ${getDeliveryDate(3)} (incluye 3 días de producción)`,
+    image: [
+      {
+        src: "/assets/hortensia/hortensia-02.jpeg",
+        color: "lila",
+      },
+      {
+        src: "/assets/hortensia/hortensia-03.jpeg",
+        color: "lila",
+      },
+      {
+        src: "/assets/hortensia/hortensia-04.jpeg",
+        color: "lila",
+      },
+      {
+        src: "/assets/hortensia/hortensia-05.jpeg",
+        color: "lila",
+      },
+      {
+        src: "/assets/hortensia/hortensia-06.jpeg",
+        color: "fucsia",
+      },
+      {
+        src: "/assets/hortensia/hortensia-07.jpeg",
+        color: "fucsia",
+      },
+    ],
+    category: "flores hortensia",
+    status: "available",
+    offer: false,
+  },
+  {
     name: "Flor de Arpillera Color",
     packs: [
       {qty: 4, price: 22000},
