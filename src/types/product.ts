@@ -9,7 +9,7 @@ export interface ProductPack {
 }
 
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   title: string;
   packs: ProductPack[];

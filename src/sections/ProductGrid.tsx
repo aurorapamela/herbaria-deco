@@ -1,6 +1,6 @@
 import ProductCard from "@/components/ProductCard";
 import {AnimatePresence, motion} from "framer-motion";
-import {MessageCircle, Moon, Sun} from "lucide-react";
+import {MessageCircle} from "lucide-react";
 import {SetStateAction, useMemo, useState} from "react";
 import {products} from "../data/products";
 import {GLOBAL_MESSAGE, PHONE_NUMBER} from "../constants/whatsapp";
@@ -32,7 +32,7 @@ export default function ProductGrid({dark, setDark}: ProductGridProps) {
 
   return (
     <div>
-      <div className="pt-32 px-4 md:pt-20">
+      <div className="pt-32 px-4">
         <Header
           dark={dark}
           setDark={setDark}

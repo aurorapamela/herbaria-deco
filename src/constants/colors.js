@@ -24,5 +24,6 @@ export const COLOR_MAP = {
   coral: "#FF7F50",
   chocolate: "#4E342E",
   arpillera: "#b47f5eb1",
+  arpillera_bordo: "#6E2C2C",
   lienzo: "#f4eada",
 };

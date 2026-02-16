@@ -11,7 +11,7 @@ export default function Footer({dark}: FooterProps) {
   const rotateOnScroll = useTransform(scrollY, [0, 300], [0, 6]);
 
   return (
-    <footer className="mt-8 border-t border-primary/20 dark:border-secondary/20 py-6">
+    <footer className="border-t border-primary/20 dark:border-secondary/20 py-6">
       <div className="max-w-md mx-auto px-4 flex flex-col items-center gap-2 text-xs text-primary/70 dark:text-secondary/70">
         <motion.img
           src={dark ? "/leaf-light.svg" : "/leaf-dark.svg"}

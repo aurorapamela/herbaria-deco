@@ -1,4 +1,5 @@
-import type {Product} from "@/types/product";
+import {v4 as uuid} from "uuid";
+import {Product} from "@/types/product";
 
 const getDeliveryDate = (days: number) => {
   const today = new Date();
@@ -11,9 +12,10 @@ const getDeliveryDate = (days: number) => {
   });
 };
 
-export const products: Product[] = [
+export type ProductBase = Omit<Product, "id">;
+
+const productsData: ProductBase[] = [
   {
-    id: 1,
     name: "Flor de Lienzo",
     packs: [
       {qty: 4, price: 19000},
@@ -40,7 +42,6 @@ export const products: Product[] = [
     offer: false,
   },
   {
-    id: 2,
     name: "Flor de Arpillera",
     packs: [
       {qty: 4, price: 19000},
@@ -64,7 +65,62 @@ export const products: Product[] = [
     offer: false,
   },
   {
-    id: 3,
+    name: "Flor de Arpillera Color",
+    packs: [
+      {qty: 4, price: 22000},
+      {qty: 6, price: 32000},
+      {qty: 8, price: 42000},
+      {qty: 12, price: 57600},
+    ],
+    title: "Flores de Arpillera de color personalizado",
+    description: [
+      "Diámetro cada flor: 10 cm",
+      "Largo total (incluye tallo): 30 cm",
+    ],
+    conditions: `Entrega estimada: ${getDeliveryDate(7)} (incluye 7 días de producción)`,
+    image: [
+      {
+        src: "/assets/arpillera-color/bordo-05.jpeg",
+        color: "bordo",
+      },
+      {
+        src: "/assets/arpillera-color/bordo-02.jpeg",
+        color: "bordo",
+      },
+      {
+        src: "/assets/arpillera-color/bordo-03.jpeg",
+        color: "bordo",
+      },
+      {
+        src: "/assets/arpillera-color/bordo-01.jpeg",
+        color: "bordo",
+      },
+      {
+        src: "/assets/arpillera-color/roja-01.jpeg",
+        color: "rojo",
+      },
+      {
+        src: "/assets/arpillera-color/roja-02.jpeg",
+        color: "rojo",
+      },
+      {
+        src: "/assets/arpillera-color/roja-03.jpeg",
+        color: "rojo",
+      },
+      {
+        src: "/assets/arpillera-color/roja-04.jpeg",
+        color: "rojo",
+      },
+      {
+        src: "/assets/arpillera-color/roja-05.jpeg",
+        color: "rojo",
+      },
+    ],
+    category: "flores arpillera personalizada",
+    status: "available",
+    offer: false,
+  },
+  {
     name: "Flores Difusoras",
     packs: [
       {qty: 6, price: 18000},
@@ -89,7 +145,6 @@ export const products: Product[] = [
     offer: false,
   },
   {
-    id: 4,
     name: "Flores Difusoras Chicas",
     packs: [
       {qty: 4, price: 6000},
@@ -114,7 +169,6 @@ export const products: Product[] = [
     offer: false,
   },
   {
-    id: 5,
     name: "Flores Ceremonia - 15 años",
     packs: [
       {qty: 15, price: 65000},
@@ -158,14 +212,13 @@ export const products: Product[] = [
     offer: false,
   },
   {
-    id: 6,
     name: "Flores artificiales",
     packs: [
       {qty: 10, price: 29000},
       {qty: 20, price: 58000},
     ],
     title: "Flores de tela cerradas",
-    description: ["Diámetro cada flor: ", "Largo total: 30cm"],
+    description: ["Diámetro cada flor: 7cm", "Largo total: 30cm"],
     conditions: `Entrega estimada: ${getDeliveryDate(5)} (incluye 5 días de producción)`,
     image: [
       {
@@ -188,9 +241,18 @@ export const products: Product[] = [
         src: "/assets/cerradas/cerradas-05.jpeg",
         color: "natural",
       },
+      {
+        src: "/assets/cerradas/cerradas-06.jpeg",
+        color: "natural",
+      },
     ],
     category: "flores artificiales",
     status: "available",
     offer: false,
   },
 ];
+
+export const products: Product[] = productsData.map((product) => ({
+  ...product,
+  id: uuid(),
+}));

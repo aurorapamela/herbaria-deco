@@ -260,7 +260,7 @@ Color: ${selectedColor}
               href={`https://wa.me/${PHONE_NUMBER}?text=${message}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="block w-full text-center border py-2 rounded-full hover:bg-primary hover:text-secondary transition text-sm"
+              className="block w-full text-center border py-2 rounded-full bg-primary text-secondary hover:bg-primary/80 hover:text-secondary/80 transition text-sm"
             >
               Consultar
             </a>

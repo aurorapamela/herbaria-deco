@@ -25,7 +25,7 @@ backdrop-blur
 border-b border-primary/10 dark:border-secondary/10
 "
     >
-      <div className="max-w-7xl mx-auto px-4 py-3">
+      <div className="max-w-7xl mx-auto px-4 py-4 md:py-8">
         <div className="grid grid-cols-2 md:grid-cols-3 items-center">
           <motion.input
             initial={{opacity: 0}}
@@ -41,11 +41,14 @@ px-3 py-2 rounded-xl
 border border-primary/20 dark:border-secondary/20
 bg-transparent text-sm
 focus:outline-none
+
+placeholder:text-primary/50
+dark:placeholder:text-secondary/50
 "
           />
 
           <div className="justify-self-start md:justify-self-center">
-            <Logo className="h-6 md:h-8 text-primary dark:text-secondary" />
+            <Logo className="h-6 md:h-7 text-primary dark:text-secondary" />
           </div>
 
           <div className="justify-self-end">
