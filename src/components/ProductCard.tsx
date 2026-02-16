@@ -29,9 +29,12 @@ export default function ProductCard({product}: ProductCardProps) {
   }, [images]);
 
   const colorKeys = Object.keys(groupedImages);
-  const [selectedColor, setSelectedColor] = useState(colorKeys[0]);
+  const allColors = ["todos", ...colorKeys];
 
-  const filteredImages = groupedImages[selectedColor];
+  const [selectedColor, setSelectedColor] = useState("todos");
+
+  const filteredImages =
+    selectedColor === "todos" ? images : groupedImages[selectedColor];
 
   const message = encodeURIComponent(
     `Hola! 👋
@@ -127,7 +130,12 @@ Color: ${selectedColor}
             <div className="relative mt-1">
               <span
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full border"
-                style={{backgroundColor: COLOR_MAP[selectedColor]}}
+                style={{
+                  background:
+                    selectedColor === "todos"
+                      ? "linear-gradient(45deg,#e6d8c3,#f3d037,#e8a1b0,#6b8e23)"
+                      : COLOR_MAP[selectedColor],
+                }}
               />
               <div className="relative w-full">
                 <select
@@ -148,7 +156,7 @@ Color: ${selectedColor}
   outline-none
 "
                 >
-                  {colorKeys.map((color) => (
+                  {allColors.map((color) => (
                     <option
                       key={color}
                       value={color}
