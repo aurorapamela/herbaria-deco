@@ -27,9 +27,9 @@ export default function ScrollToTop() {
 fixed bottom-20 right-4 z-40
 w-8 h-8 rounded-full
 flex items-center justify-center
-border border-primary/80 dark:border-secondary/30
-bg-secondary/70 dark:bg-primary
-text-primary dark:text-secondary
+dark:border border-secondary/30  
+bg-secondary/70 dark:bg-light/50
+text-primary/50 dark:text-primary
 shadow-md
 hover:scale-105 transition
 "
