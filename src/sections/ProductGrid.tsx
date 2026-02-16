@@ -1,9 +1,10 @@
 import ProductCard from "@/components/ProductCard";
 import {AnimatePresence, motion} from "framer-motion";
 import {MessageCircle, Moon, Sun} from "lucide-react";
-import {useMemo, useState} from "react";
+import {SetStateAction, useMemo, useState} from "react";
 import {products} from "../data/products";
 import {GLOBAL_MESSAGE, PHONE_NUMBER} from "../constants/whatsapp";
+import Header from "./Header";
 
 interface ProductGridProps {
   dark: boolean;
@@ -30,44 +31,15 @@ export default function ProductGrid({dark, setDark}: ProductGridProps) {
   }, [search, category]);
 
   return (
-    <div
-    // className="max-w-md mx-auto px-4 py-4"
-    >
-      <div className="mx-auto px-4 py-4">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-3xl font-semibold dark:text-secondary">
-            Herbaria - Catálogo
-          </h1>
-          <button
-            onClick={() => setDark(!dark)}
-            className="
-    p-2 rounded-full
-    border border-primary dark:border-secondary
-    text-primary dark:text-secondary
-    transition
-    hover:bg-primary hover:text-secondary
-    dark:hover:bg-secondary dark:hover:text-primary
-  "
-          >
-            {dark ? (
-              <Sun size={18} strokeWidth={2} />
-            ) : (
-              <Moon size={18} strokeWidth={2} />
-            )}
-          </button>
-        </div>
-
-        <motion.input
-          initial={{opacity: 0}}
-          animate={{opacity: 1}}
-          type="text"
-          placeholder="Buscar artículo..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-96 mb-4 px-4 py-3 rounded-2xl border border-primary/20 dark:border-secondary/20 bg-light dark:bg-primary dark:text-secondary focus:outline-none"
+    <div>
+      <div className="pt-32 px-4 md:pt-20">
+        <Header
+          dark={dark}
+          setDark={setDark}
+          search={search}
+          setSearch={setSearch}
         />
-
-        <div className="flex gap-2 overflow-x-auto mb-4 pb-2">
+        <div className="grid grid-cols-2 gap-2 mb-4 md:flex md:overflow-x-auto md:pb-2">
           {categories.map((cat: string) => (
             <button
               key={cat}
@@ -83,7 +55,6 @@ export default function ProductGrid({dark, setDark}: ProductGridProps) {
             </button>
           ))}
         </div>
-
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           <AnimatePresence>
             {filteredProducts.map((product) => (
@@ -92,6 +63,7 @@ export default function ProductGrid({dark, setDark}: ProductGridProps) {
           </AnimatePresence>
         </div>
       </div>
+
       <a
         href={`https://wa.me/${PHONE_NUMBER}?text=${GLOBAL_MESSAGE}`}
         target="_blank"
