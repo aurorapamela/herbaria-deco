@@ -295,8 +295,17 @@ Color: ${selectedColor}
 
             {supplierType === "mayor" && (
               <div className="px-5 pt-3">
-                <p className="text-xs uppercase tracking-wide">Cantidad</p>
-                <p className="mt-1 text-sm">{wholesaleUnits} unidades</p>
+                <p className="text-xs uppercase tracking-wide font-semibold text-red-700 dark:text-red-200">
+                  Cantidad Minima 24 Unidades
+                </p>
+              </div>
+            )}
+
+            {supplierType === "menor" && (
+              <div className="px-5 pt-3">
+                <p className="text-xs uppercase tracking-wide font-semibold text-green-700 dark:text-green-300">
+                  Cantidad Menor A 24 Unidades
+                </p>
               </div>
             )}
           </>

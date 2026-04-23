@@ -28,7 +28,7 @@ const productsData: ProductBase[] = [
     title: "Flores de Lienzo",
     description: [
       "Diámetro cada flor: 10 cm",
-      "Largo total (incluye tallo): 30 cm",
+      "Largo total (incluye tallo): 40 cm",
     ],
     conditions: `Entrega estimada: ${getDeliveryDate(3)} (incluye 3 días de producción)`,
     image: [
@@ -56,7 +56,7 @@ const productsData: ProductBase[] = [
     title: "Flores de Arpillera",
     description: [
       "Diámetro cada flor: 10 cm",
-      "Largo total (incluye tallo): 30 cm",
+      "Largo total (incluye tallo): 40 cm",
     ],
     conditions: `Entrega estimada: ${getDeliveryDate(3)} (incluye 3 días de producción)`,
     image: [
@@ -65,6 +65,32 @@ const productsData: ProductBase[] = [
       {src: "/assets/arpillera/arpillera-03.jpeg", color: "arpillera"},
     ],
     category: "arpillera",
+    status: "available",
+    offer: false,
+  },
+  {
+    name: "Flor de Gasa",
+    packs: [
+      {qty: 4, price: 19000},
+      {qty: 6, price: 29000},
+      {qty: 8, price: 39000},
+      {qty: 12, price: 58000},
+    ],
+    retailPrice: 3800,
+    wholesalePrice: 3300,
+    title: "Flores de Gasa",
+    description: [
+      "Diámetro cada flor: 10 cm",
+      "Largo total (incluye tallo): 40 cm",
+    ],
+    conditions: `Entrega estimada: ${getDeliveryDate(3)} (incluye 3 días de producción)`,
+    image: [
+      {src: "/assets/gasa/gasa-03.jpeg", color: "gasa"},
+      {src: "/assets/gasa/gasa-01.jpeg", color: "gasa"},
+      {src: "/assets/gasa/gasa-02.jpeg", color: "gasa"},
+      {src: "/assets/gasa/gasa-04.jpeg", color: "gasa"},
+    ],
+    category: "gasa",
     status: "available",
     offer: false,
   },
@@ -97,8 +123,8 @@ const productsData: ProductBase[] = [
       {qty: 4, price: 23000},
       {qty: 8, price: 46000},
     ],
-    retailPrice: 6000,
-    wholesalePrice: 5500,
+    retailPrice: 3800,
+    wholesalePrice: 3300,
     title: "Flor Hortensia de tela",
     description: [
       "Diámetro cada flor: 11 cm",
@@ -143,12 +169,12 @@ const productsData: ProductBase[] = [
       {qty: 8, price: 42000},
       {qty: 12, price: 57600},
     ],
-    retailPrice: 5700,
-    wholesalePrice: 5200,
+    retailPrice: 4000,
+    wholesalePrice: 3500,
     title: "Flores de Arpillera de color personalizado",
     description: [
       "Diámetro cada flor: 10 cm",
-      "Largo total (incluye tallo): 30 cm",
+      "Largo total (incluye tallo): 40 cm",
     ],
     conditions: `Entrega estimada: ${getDeliveryDate(7)} (incluye 7 días de producción)`,
     image: [
@@ -220,7 +246,34 @@ const productsData: ProductBase[] = [
     offer: false,
   },
   {
-    name: "Difusoras Chicas",
+    name: "Difusoras con Follaje interno",
+    packs: [
+      {qty: 6, price: 18000},
+      {qty: 8, price: 23000},
+      {qty: 10, price: 29000},
+      {qty: 12, price: 34000},
+    ],
+    retailPrice: 3000,
+    wholesalePrice: 2500,
+    title: "Flores difusoras con follaje interno",
+    description: ["Diámetro cada flor: 10cm", "Largo total: 20 cm"],
+    conditions: `Entrega estimada: ${getDeliveryDate(3)} (incluye 3 días de producción)`,
+    image: [
+      {
+        src: "/assets/difusora-follaje/difusora-follaje-01.jpeg",
+        color: "natural",
+      },
+      {
+        src: "/assets/difusora-follaje/difusora-follaje-02.jpeg",
+        color: "marron",
+      },
+    ],
+    category: "difusoras",
+    status: "available",
+    offer: false,
+  },
+  {
+    name: "Difusoras",
     packs: [
       {qty: 4, price: 6000},
       {qty: 6, price: 9000},
@@ -251,10 +304,10 @@ const productsData: ProductBase[] = [
       {qty: 15, price: 65000},
       {qty: 25, price: 117500},
     ],
-    retailPrice: 4500,
-    wholesalePrice: 4000,
+    retailPrice: 4000,
+    wholesalePrice: 3500,
     title: "Flores ceremonia - 15 años",
-    description: ["Diámetro cada flor: ", "Largo total: "],
+    description: ["Diámetro cada flor: ", "Largo total: 40 cm"],
     conditions: `Entrega estimada: ${getDeliveryDate(5)} (incluye 5 días de producción)`,
     image: [
       {
@@ -296,10 +349,10 @@ const productsData: ProductBase[] = [
       {qty: 10, price: 29000},
       {qty: 20, price: 58000},
     ],
-    retailPrice: 0,
-    wholesalePrice: 0,
+    retailPrice: 3700,
+    wholesalePrice: 3200,
     title: "Flores de tela cerradas",
-    description: ["Diámetro cada flor: 7cm", "Largo total: 30cm"],
+    description: ["Diámetro cada flor: 7cm", "Largo total: 40cm"],
     conditions: `Entrega estimada: ${getDeliveryDate(5)} (incluye 5 días de producción)`,
     image: [
       {
@@ -327,7 +380,7 @@ const productsData: ProductBase[] = [
         color: "natural",
       },
     ],
-    category: "flores artificiales",
+    category: "rosa cerrada",
     status: "available",
     offer: false,
   },
@@ -340,7 +393,7 @@ const productsData: ProductBase[] = [
     retailPrice: 3100,
     wholesalePrice: 2700,
     title: "Difusoras de cordón",
-    description: ["Diámetro cada flor: ", "Largo total: "],
+    description: ["Diámetro cada flor: 10 cm", "Largo total de cordón: 15 cm"],
     conditions: `Entrega estimada: ${getDeliveryDate(5)} (incluye 5 días de producción)`,
     image: [
       {
