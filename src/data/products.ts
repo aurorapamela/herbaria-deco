@@ -97,8 +97,8 @@ const productsData: ProductBase[] = [
       {qty: 4, price: 23000},
       {qty: 8, price: 46000},
     ],
-    retailPrice: 0,
-    wholesalePrice: 0,
+    retailPrice: 6000,
+    wholesalePrice: 5500,
     title: "Flor Hortensia de tela",
     description: [
       "Diámetro cada flor: 11 cm",
@@ -143,8 +143,8 @@ const productsData: ProductBase[] = [
       {qty: 8, price: 42000},
       {qty: 12, price: 57600},
     ],
-    retailPrice: 0,
-    wholesalePrice: 0,
+    retailPrice: 5700,
+    wholesalePrice: 5200,
     title: "Flores de Arpillera de color personalizado",
     description: [
       "Diámetro cada flor: 10 cm",
@@ -228,8 +228,8 @@ const productsData: ProductBase[] = [
       {qty: 10, price: 15000},
       {qty: 12, price: 18000},
     ],
-    retailPrice: 0,
-    wholesalePrice: 0,
+    retailPrice: 1600,
+    wholesalePrice: 1400,
     title: "Flores difusoras chicas",
     description: ["Diámetro cada flor: ", "Largo total: "],
     conditions: `Entrega estimada: ${getDeliveryDate(3)} (incluye 3 días de producción)`,
@@ -251,8 +251,8 @@ const productsData: ProductBase[] = [
       {qty: 15, price: 65000},
       {qty: 25, price: 117500},
     ],
-    retailPrice: 0,
-    wholesalePrice: 0,
+    retailPrice: 4500,
+    wholesalePrice: 4000,
     title: "Flores ceremonia - 15 años",
     description: ["Diámetro cada flor: ", "Largo total: "],
     conditions: `Entrega estimada: ${getDeliveryDate(5)} (incluye 5 días de producción)`,
@@ -291,7 +291,7 @@ const productsData: ProductBase[] = [
     offer: false,
   },
   {
-    name: "Flores artificiales",
+    name: "Rosas cerradas",
     packs: [
       {qty: 10, price: 29000},
       {qty: 20, price: 58000},
@@ -328,6 +328,63 @@ const productsData: ProductBase[] = [
       },
     ],
     category: "flores artificiales",
+    status: "available",
+    offer: false,
+  },
+  {
+    name: "Difusoras Cordón",
+    packs: [
+      {qty: 10, price: 29000},
+      {qty: 20, price: 58000},
+    ],
+    retailPrice: 3100,
+    wholesalePrice: 2700,
+    title: "Difusoras de cordón",
+    description: ["Diámetro cada flor: ", "Largo total: "],
+    conditions: `Entrega estimada: ${getDeliveryDate(5)} (incluye 5 días de producción)`,
+    image: [
+      {
+        src: "/assets/cordon/cordon-01.jpeg",
+        color: "beige",
+      },
+      {
+        src: "/assets/cordon/cordon-02.jpeg",
+        color: "beige",
+      },
+      {
+        src: "/assets/cordon/cordon-03.jpeg",
+        color: "salmon",
+      },
+      {
+        src: "/assets/cordon/cordon-04.jpeg",
+        color: "salmon",
+      },
+      {
+        src: "/assets/cordon/cordon-05.jpeg",
+        color: "natural",
+      },
+      {
+        src: "/assets/cordon/cordon-06.jpeg",
+        color: "natural",
+      },
+      {
+        src: "/assets/cordon/cordon-07.jpeg",
+        color: "blanco",
+      },
+      {
+        src: "/assets/cordon/cordon-08.jpeg",
+        color: "blanco",
+      },
+      {
+        src: "/assets/cordon/cordon-09.jpeg",
+        color: "rosa",
+      },
+      {
+        src: "/assets/cordon/cordon-10.jpeg",
+        color: "rosa",
+      },
+    ],
+    category: "difusoras",
     status: "available",
     offer: false,
   },

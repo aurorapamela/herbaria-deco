@@ -314,6 +314,7 @@ Color: ${selectedColor}
           {/* <p className="text-sm">{fullTitle}</p> */}
           <p className="font-semibold text-lg">
             ${currentPrice.toLocaleString("es-AR")}
+            {view === "supplier" ? " c/u" : ""}
           </p>
 
           <div className="text-sm">
