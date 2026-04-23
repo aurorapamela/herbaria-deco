@@ -14,6 +14,7 @@ interface ProductGridProps {
 export default function ProductGrid({dark, setDark}: ProductGridProps) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Todos");
+  const [view, setView] = useState<"pack" | "supplier">("supplier");
 
   const categories = ["Todos", ...new Set(products.map((p) => p.category))];
 
@@ -55,10 +56,18 @@ export default function ProductGrid({dark, setDark}: ProductGridProps) {
             </button>
           ))}
         </div>
+        <div className="flex gap-2 mb-4">
+          <button
+            onClick={() => setView("supplier")}
+            className="px-3 py-1 rounded-full text-sm bg-primary text-secondary dark:bg-secondary dark:text-primary"
+          >
+            Vista Por Mayor
+          </button>
+        </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
           <AnimatePresence>
             {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} view={view} />
             ))}
           </AnimatePresence>
         </div>

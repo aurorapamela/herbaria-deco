@@ -7,16 +7,33 @@ import {COLOR_MAP} from "@/constants/colors";
 
 interface ProductCardProps {
   product: Product;
-  view?: string;
+  view?: "pack" | "supplier";
 }
 
-export default function ProductCard({product}: ProductCardProps) {
+export default function ProductCard({
+  product,
+  view = "supplier",
+}: ProductCardProps) {
   const [open, setOpen] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const [selectedPack, setSelectedPack] = useState(product.packs[0]);
+  const [supplierType, setSupplierType] = useState<"menor" | "mayor">("mayor");
+  const wholesaleUnits = 24;
 
   const fullName = `${product.name}`;
-  const fullTitle = `Pack de ${selectedPack.qty} unidades`;
+  const fullTitle =
+    view === "pack"
+      ? `Pack de ${selectedPack.qty} unidades`
+      : supplierType === "mayor"
+        ? `Por mayor (${wholesaleUnits} unidades)`
+        : "Por menor";
+
+  const currentPrice =
+    view === "pack"
+      ? selectedPack.price
+      : supplierType === "menor"
+        ? product.retailPrice
+        : product.wholesalePrice;
 
   const images = product.image;
 
@@ -40,8 +57,13 @@ export default function ProductCard({product}: ProductCardProps) {
     `Hola! 👋
 Estoy interesada en:
 🛍️ ${fullName}
-📦 Pack x ${selectedPack.qty}
-💲 $${selectedPack.price.toLocaleString("es-AR")}
+${
+  view === "pack"
+    ? `📦 Pack x ${selectedPack.qty}\n💲 $${selectedPack.price.toLocaleString("es-AR")}`
+    : supplierType === "menor"
+      ? `📦 Por menor\n💲 $${product.retailPrice.toLocaleString("es-AR")} c/u`
+      : `📦 Por mayor (${wholesaleUnits} unidades)\n💲 $${product.wholesalePrice.toLocaleString("es-AR")} c/u`
+}
 Color: ${selectedColor}
 ¿Sigue disponible?`,
   );
@@ -186,7 +208,7 @@ Color: ${selectedColor}
           </div>
         )}
 
-        {product.packs.length > 1 && (
+        {view === "pack" && product.packs.length > 1 && (
           <div className="px-5 pt-3">
             <label className="text-xs uppercase tracking-wide">Cantidad</label>
 
@@ -231,6 +253,55 @@ Color: ${selectedColor}
           </div>
         )}
 
+        {view === "supplier" && (
+          <>
+            <div className="px-5 pt-3">
+              <label className="text-xs uppercase tracking-wide">Tipo</label>
+
+              <div className="relative w-full mt-1">
+                <select
+                  value={supplierType}
+                  onChange={(e) =>
+                    setSupplierType(e.target.value as "menor" | "mayor")
+                  }
+                  className="
+  w-full
+  appearance-none
+  pl-4 pr-12 py-2
+  border border-primary/30 dark:border-secondary/30
+  rounded-xl
+  text-sm
+  bg-transparent
+  focus:border-primary dark:focus:border-secondary
+  outline-none
+"
+                >
+                  <option value="menor">Por menor</option>
+                  <option value="mayor">Por mayor</option>
+                </select>
+                <ChevronDown
+                  size={16}
+                  className="
+    pointer-events-none
+    absolute
+    right-4
+    top-1/2
+    -translate-y-1/2
+    text-primary/90 dark:text-secondary/80
+  "
+                />
+              </div>
+            </div>
+
+            {supplierType === "mayor" && (
+              <div className="px-5 pt-3">
+                <p className="text-xs uppercase tracking-wide">Cantidad</p>
+                <p className="mt-1 text-sm">{wholesaleUnits} unidades</p>
+              </div>
+            )}
+          </>
+        )}
+
         <div
           className={`
             ${"p-5"}
@@ -242,7 +313,7 @@ Color: ${selectedColor}
 
           {/* <p className="text-sm">{fullTitle}</p> */}
           <p className="font-semibold text-lg">
-            ${selectedPack.price.toLocaleString("es-AR")}
+            ${currentPrice.toLocaleString("es-AR")}
           </p>
 
           <div className="text-sm">

@@ -13,6 +13,8 @@ export interface Product {
   name: string;
   title: string;
   packs: ProductPack[];
+  retailPrice: number;
+  wholesalePrice: number;
   description: string[];
   conditions: string;
   image: ProductImage[];
